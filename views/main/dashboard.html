@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{template "general/header"}}
+  </head>
+  <body>
+    <div
+      class="flex flex-col w-screen h-screen overflow-auto text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200"
+    >
+      <div
+        class="flex items-center flex-shrink-0 w-full h-16 px-10 bg-white bg-opacity-75"
+      >
+        <svg
+          class="w-8 h-8 text-indigo-600 stroke-current"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+          />
+        </svg>
+        <h1 class="text-2xl font-bold ml-2">Kanban App</h1>
+        <div class="flex items-center justify-center w-8 h-8 ml-auto">
+          <a href="/logout">
+            <buton
+              class="flex items-center justify-center w-8 h-8 ml-auto cursor-pointer font-bold"
+            >
+              Logout
+            </buton>
+          </a>
+        </div>
+      </div>
+      <!-- <div class="px-10 mt-6">
+        
+      </div> -->
+
+      <!-- TODO: answer here -->
+      <div class="px-10 mt-6 flex space-x-4">
+        {{range .categories}}
+        <div class="w-1/4">
+          <div class="flex content-center justify-between py-2">
+            <h2 class="font-bold text-xl">{{.Type}}</h2>
+            <!-- Add new task -->
+            <div class="space-x-2">
+              <a
+                href="/task/add?category={{.ID}}"
+                class="text-blue-500 font-bold text-xl"
+                >+</a
+              >
+              <!-- Delete Category -->
+              <a
+                href="/category/delete?category_id={{.ID}}"
+                class="text-red-500"
+                >🗑️</a
+              >
+            </div>
+          </div>
+          {{range .Tasks}}
+          <div class="bg-white rounded-lg shadow p-4 mb-2">
+            <p class="font-bold">{{.Title}}</p>
+            <p class="text-sm text-gray-600">{{.Description}}</p>
+            <div class="flex space-x-2 mt-2">
+              <a href="/task/update?task_id={{.ID}}" class="text-blue-500"
+                >✏️</a
+              >
+              <a href="/task/delete?task_id={{.ID}}" class="text-red-500">🗑️</a>
+              <a
+                href="/task/update/process?task_id={{.ID}}&category_id={{categoryDec .CategoryID}}"
+                class="text-gray-500"
+                >⬅️</a
+              >
+              <a
+                href="/task/update/process?task_id={{.ID}}&category_id={{categoryInc .CategoryID}}"
+                class="text-gray-500"
+                >➡️</a
+              >
+            </div>
+          </div>
+          {{end}}
+        </div>
+        {{end}}
+        <!-- Add new category -->
+        <div class="w-1/6">
+          <a
+            href="/category/add"
+            class="block bg-blue-500 text-white font-bold py-2 rounded text-center"
+          >
+            + Add Category
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
